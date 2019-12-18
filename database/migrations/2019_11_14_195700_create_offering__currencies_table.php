@@ -13,8 +13,13 @@ class CreateOfferingCurrenciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('offering__currencies', function (Blueprint $table) {
+        Schema::create('offering_currencies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title');
+            $table->longText('description')->nullable();
+            $table->string('code');
+            $table->string('sign');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

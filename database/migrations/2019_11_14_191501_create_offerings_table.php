@@ -15,6 +15,12 @@ class CreateOfferingsTable extends Migration
     {
         Schema::create('offerings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('parish_id')->nullable();
+            $table->string('title');
+            $table->longText('description')->nullable();
+            $table->longText('slug');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

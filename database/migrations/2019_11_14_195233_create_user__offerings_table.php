@@ -13,8 +13,14 @@ class CreateUserOfferingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user__offerings', function (Blueprint $table) {
+        Schema::create('user_offerings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('giving_id');
+            $table->bigInteger('offering_id');
+            $table->bigInteger('parish_id');
+            $table->bigInteger('currency_id');
+            $table->bigInteger('transaction_id');
             $table->timestamps();
         });
     }

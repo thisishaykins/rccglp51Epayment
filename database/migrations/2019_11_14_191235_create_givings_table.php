@@ -15,6 +15,14 @@ class CreateGivingsTable extends Migration
     {
         Schema::create('givings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('offering_id');
+            $table->bigInteger('parish_id');
+            $table->bigInteger('currency_id');
+            $table->bigInteger('transaction_id');
+            $table->float('amount', 9, 2);
+            $table->string('comment_feedback')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

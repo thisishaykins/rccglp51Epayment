@@ -15,6 +15,9 @@ class CreateParishesOfferingsTable extends Migration
     {
         Schema::create('parishes__offerings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('parish_id');
+            $table->bigInteger('offering_id');
+            $table->longText('helper_note')->nullable();
             $table->timestamps();
         });
     }
