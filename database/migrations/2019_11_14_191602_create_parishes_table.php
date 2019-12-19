@@ -21,7 +21,7 @@ class CreateParishesTable extends Migration
             $table->longText('address')->nullable();
             $table->string('contact_person');
             $table->string('contact_phone');
-            $table->email('contact_email');
+            $table->string('contact_email');
             $table->string('paystack_id')->nullable();
             $table->string('paystack_secret_key')->nullable();
             $table->string('paystack_public_key')->nullable();
