@@ -12,8 +12,8 @@ class AdminsTableSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->insert([
-            'name' => 'Akinshola Samuel',
-            'email' => 'akinsholasamuel@gmail.com',
+            'name' => 'RCCG EPay Admin',
+            'email' => 'epayment@rccglp51.org',
             'email_verified_at' => now(),
             'password' => Hash::make('secret'),
             'created_at' => now(),

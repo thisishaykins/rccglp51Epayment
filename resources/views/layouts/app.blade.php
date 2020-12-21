@@ -7,74 +7,142 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ getenv('APP_NAME') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('public/assets/js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }} " />
+    <link rel="stylesheet" href="{{ asset('public/assets/css/main.css') }} " />
+    <noscript><link rel="stylesheet" href="{{ asset('public/assets/css/noscript.css') }}" /></noscript>
+    <link href="{{ asset('public/assets/css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body class="is-preload">
+    <div class="rccglp51-space-worship" style="
+            background: url({{ asset('public/images/rccg-lp51-banner.jpg') }});"
+        ></div>
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+        <!-- Header -->
+        <header id="header">
+            <div class="inner">
 
-                    </ul>
+                <!-- Logo -->
+                    <a href="{{ config('app.url') }}" class="logo">
+                        <span class="symbol">
+                            <img src="{{ asset('public/images/rccg-logo.png') }}" alt="" />
+                        </span>
+                        <span class="title" title="RCCG Lagos Province 51">RCCG Lagos Province 51</span>
+                    </a>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                <!-- Nav -->
+                    <nav>
+                        <ul>
+                            <li><a href="#menu">Menu</a></li>
+                        </ul>
+                    </nav>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
             </div>
+        </header>
+
+    <!-- Menu -->
+        <nav id="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/pages/about">About</a></li>
+                <li><a href="/pages/instructions">Payment Instruction</a></li>
+                <li><a href="/pages/faqs">FAQS</a></li>
+                <li><a href="/pages/contact">Contact</a></li>
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}"><!--<i class="icon style1 fa-user"></i>--> {{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}"><!--<i class="icon style1 fa-user"></i>--> {{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+                    <li>
+                        <a href="#">
+                            Welcome, {{ Auth::user()->first_name }} <span class="caret"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @endguest
+            </ul>
         </nav>
 
-        <main class="py-4">
+
+        <!-- <main> -->
             @yield('content')
-        </main>
+        <!-- </main> -->
+    
+    <!-- Footer -->
+        <footer id="footer">
+            <div class="inner">
+                <section>
+                    <h2>Get in touch</h2>
+                    <form method="post" action="#">
+                        @csrf
+                        <div class="fields">
+                            <div class="field half">
+                                <input type="text" name="name" id="name" placeholder="Name" />
+                            </div>
+                            <div class="field half">
+                                <input type="email" name="email" id="email" placeholder="Email" />
+                            </div>
+                            <div class="field">
+                                <textarea name="message" id="message" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <ul class="actions">
+                            <li><input type="submit" disabled value="Send" class="primary" /></li>
+                        </ul>
+                    </form>
+                </section>
+                <section>
+                    <h2>Follow</h2>
+                    <ul class="icons">
+                        <li><a href="https://www.facebook.com/rccglp51" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+                        <li><a href="https://www.twitter.com/rccglp51" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="https://www.instagram.com/rccglp51" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="https://www.youtube.com/rccglp51" class="icon brands style2 fa-youtube"><span class="label">YouTube</span></a></li>
+                        <!-- <li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li> -->
+                        <li><a href="mailto:epayment@rccglp51.org" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+                    </ul>
+                </section>
+                <ul class="copyright">
+                    <li>&copy; {{ date('Y') }} - {{ env('APP_NAME') }}. All rights reserved</li><li>Design & Developed: <a href="#">RCCGLP51 Media & Technical Dept.</a></li>
+                </ul>
+            </div>
+        </footer>
+
     </div>
+
+<!-- Scripts -->
+    <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/browser.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/util.js') }}"></script>
+    <script src="{{ asset('public/assets/js/main.js') }}"></script>
 </body>
 </html>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Parishes;
+use App\Offering;
+use App\Offering_Currencies;
 use Illuminate\Http\Request;
 
 class ParishesController extends Controller
@@ -44,9 +46,14 @@ class ParishesController extends Controller
      * @param  \App\Parishes  $parishes
      * @return \Illuminate\Http\Response
      */
-    public function show(Parishes $parishes)
+    public function show($parish_slug)
     {
-        //
+        // echo $parish_slug;
+        $parish = Parishes::where(['slug' => $parish_slug, 'status' => true])->with('offerings', 'global_offerings')->firstOrFail();
+        $currencies = Offering_Currencies::all();
+        $global_offerings = Offering::all();
+        // var_dump($parish);
+        return view('parishes.show_single', compact('parish', 'currencies', 'global_offerings'));
     }
 
     /**

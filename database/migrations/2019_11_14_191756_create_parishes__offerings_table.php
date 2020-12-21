@@ -13,10 +13,12 @@ class CreateParishesOfferingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('parishes__offerings', function (Blueprint $table) {
+        Schema::create('parishes_offerings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('parish_id');
-            $table->bigInteger('offering_id');
+            $table->unsignedBigInteger('parish_id');
+            $table->foreign('parish_id')->references('id')->on('parishes')->onDelete('cascade');
+            $table->unsignedBigInteger('offering_id');
+            $table->foreign('offering_id')->references('id')->on('offerings')->onDelete('cascade');
             $table->longText('helper_note')->nullable();
             $table->timestamps();
         });

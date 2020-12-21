@@ -13,14 +13,20 @@ class CreateUserOfferingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_offerings', function (Blueprint $table) {
+        Schema::create('users_givings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->bigInteger('giving_id');
-            $table->bigInteger('offering_id');
-            $table->bigInteger('parish_id');
-            $table->bigInteger('currency_id');
-            $table->bigInteger('transaction_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('giving_id');
+            $table->foreign('giving_id')->references('id')->on('givings')->onDelete('cascade');
+            $table->unsignedBigInteger('offering_id')->nullable();
+            $table->foreign('offering_id')->references('id')->on('offerings')->onDelete('cascade');
+            $table->unsignedBigInteger('parish_id');
+            $table->foreign('parish_id')->references('id')->on('parishes')->onDelete('cascade');
+            $table->unsignedBigInteger('currency_id')->nullable();
+            $table->foreign('currency_id')->references('id')->on('offerings_currencies')->onDelete('cascade');
+            $table->unsignedBigInteger('transaction_id')->nullable();
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
             $table->timestamps();
         });
     }

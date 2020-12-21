@@ -15,10 +15,13 @@ class CreateParishesTable extends Migration
     {
         Schema::create('parishes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
             $table->longText('description')->nullable();
             $table->longText('address')->nullable();
+            $table->longText('logo')->nullable();
+            $table->longText('banner')->nullable();
             $table->string('contact_person');
             $table->string('contact_phone');
             $table->string('contact_email');
@@ -27,6 +30,7 @@ class CreateParishesTable extends Migration
             $table->string('paystack_public_key')->nullable();
             $table->longText('slug');
             $table->boolean('status');
+            $table->boolean('use_global_offerings')->default(true);
             $table->timestamps();
         });
     }

@@ -15,8 +15,10 @@ class CreateOfferingsTable extends Migration
     {
         Schema::create('offerings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->bigInteger('parish_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('parish_id')->nullable();
+            $table->foreign('parish_id')->references('id')->on('parishes')->onDelete('cascade');
             $table->string('title');
             $table->longText('description')->nullable();
             $table->longText('slug');
